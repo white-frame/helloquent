@@ -20,7 +20,7 @@ class Presenter extends \Laracasts\Presenter\Presenter
 	/**
 	 * @return array
 	 */
-	public function searchs()
+	public function searches()
 	{
 		return [
 
