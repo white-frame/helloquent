@@ -8,6 +8,6 @@
   },
   "require": {
     "illuminate/support": "5.1.*",
-    "laracasts/presenter": "0.2.*"
+    "white-frame/white-frame": "dev-master"
   }
 }
