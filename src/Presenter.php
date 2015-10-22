@@ -12,9 +12,9 @@ class Presenter extends \Laracasts\Presenter\Presenter
 	 */
 	public function columns()
 	{
-		return [
+		return array_merge(array_combine($this->entity->getColumns(), $this->entity->getColumns()), [
 			'actions' => 'Actions'
-		];
+		]);
 	}
 
 	/**
