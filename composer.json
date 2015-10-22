@@ -1,12 +1,13 @@
 {
-	"name": "white-frame/helloquent",
-	"description": "Repositories, Presenters and Model tools above eloquent in a all in one package",
-	"autoload": {
-		"psr-4": {
-			"WhiteFrame\\Helloquent\\" : "src/"
-		}
-	},
-	"require": {
-		"laracasts/presenter": "0.2.*"
-	}
+  "name": "white-frame/helloquent",
+  "description": "Repositories, Presenters and Model tools above eloquent in a all in one package",
+  "autoload": {
+    "psr-4": {
+      "WhiteFrame\\Helloquent\\": "src/"
+    }
+  },
+  "require": {
+    "illuminate/support": "5.1.*",
+    "laracasts/presenter": "0.2.*"
+  }
 }
