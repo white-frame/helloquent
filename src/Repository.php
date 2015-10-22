@@ -1,7 +1,9 @@
 <?php
 namespace WhiteFrame\Helloquent;
 
+use WhiteFrame\Dynatable\Dynatable;
 use WhiteFrame\Helloquent\Exceptions\EntityNotSpecifiedException;
+use WhiteFrame\Statistics\Statistics;
 
 /**
  * Class Repository
@@ -249,7 +251,7 @@ class Repository
 		}
 
 		// Registering search columns scope if exists
-		$searchColumns = array_keys($this->getModel()->present()->searchs());
+		$searchColumns = array_keys($this->getModel()->present()->searches());
 		foreach($searchColumns as $column) {
 			$scopeName = 'scope' . camel_case($column);
 
