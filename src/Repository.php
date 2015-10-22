@@ -1,6 +1,8 @@
 <?php
 namespace WhiteFrame\Helloquent;
 
+use WhiteFrame\Helloquent\Exceptions\EntityNotSpecifiedException;
+
 /**
  * Class Repository
  */
@@ -28,6 +30,9 @@ class Repository
 	 */
 	public function getModel()
 	{
+		if(empty($this->entity))
+			throw new EntityNotSpecifiedException("No valid entity found for repository " . get_class($this));
+
 		$entity = $this->entity;
 
 		return new $entity();

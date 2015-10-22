@@ -1,7 +1,7 @@
 <?php
 namespace WhiteFrame\Helloquent\Traits;
 
-use Illuminate\Database\Eloquent\Builder;
+use WhiteFrame\Helloquent\Builder;
 use WhiteFrame\Helloquent\Repository;
 
 /**
