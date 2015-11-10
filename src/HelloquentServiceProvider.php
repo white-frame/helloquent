@@ -24,6 +24,16 @@ class HelloquentServiceProvider extends ServiceProvider
     }
 
     /**
+     * Perform post-registration booting of services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'helloquent');
+    }
+
+    /**
      * Get the services provided by the provider.
      *
      * @return array
