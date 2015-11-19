@@ -1,6 +1,13 @@
 {
   "name": "white-frame/helloquent",
   "description": "Repositories, Presenters and Model tools above eloquent in a all in one package",
+  "license": "WTFPL",
+  "authors": [
+    {
+      "name": "Anael Favre",
+      "email": "anael.favre@gmail.com"
+    }
+  ],
   "autoload": {
     "psr-4": {
       "WhiteFrame\\Helloquent\\": "src/"
