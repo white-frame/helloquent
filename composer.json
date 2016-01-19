@@ -14,8 +14,8 @@
     }
   },
   "require": {
-    "illuminate/support": "5.1.*",
+    "illuminate/support": "5.2.*",
     "laracasts/presenter": "0.2.*",
-    "white-frame/white-frame": "0.*"
+    "white-frame/white-frame": "5.2.*"
   }
 }
