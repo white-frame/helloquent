@@ -1,6 +1,7 @@
 <?php namespace WhiteFrame\Helloquent;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\AliasLoader;
 
 /**
  * Class HelloquentServiceProvider
@@ -20,6 +21,14 @@ class HelloquentServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->singleton('white-frame.helloquent.builder.manager', function ($app) {
+            return new \WhiteFrame\Helloquent\Builder\Manager();
+        });
+ 
+        $this->app->booting(function () {
+            $loader = AliasLoader::getInstance();
+            $loader->alias('WhiteFrame\Helloquent', 'WhiteFrame\Helloquent\Builder\Facades\ManagerFacade');
+        });
 
     }
 
