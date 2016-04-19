@@ -15,7 +15,7 @@
   },
   "require": {
     "illuminate/support": "~5.1",
-    "laracasts/presenter": "~0.2",
-    "white-frame/support": "~5.1"
+    "white-frame/support": "~5.1",
+    "league/fractal": "~0.13"
   }
 }

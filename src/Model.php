@@ -3,8 +3,11 @@ namespace WhiteFrame\Helloquent;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Laracasts\Presenter\PresentableTrait;
-use WhiteFrame\Helloquent\Traits\RepositoryScopeAbstractionTrait;
+use WhiteFrame\Helloquent\Model\CanBePresented;
+use WhiteFrame\Helloquent\Model\CanBeRendered;
+use WhiteFrame\Helloquent\Model\CanBeTransformed;
+use WhiteFrame\Helloquent\Model\HasRepository;
+use WhiteFrame\Helloquent\Model\IsResource;
 
 /**
  * Class Model
@@ -12,8 +15,11 @@ use WhiteFrame\Helloquent\Traits\RepositoryScopeAbstractionTrait;
  */
 class Model extends \Illuminate\Database\Eloquent\Model
 {
-	use PresentableTrait;
-	use RepositoryScopeAbstractionTrait;
+	use CanBePresented;
+	use CanBeRendered;
+	use CanBeTransformed;
+	use IsResource;
+	use HasRepository;
 
 	protected $table;
 	protected $viewPath;
@@ -22,22 +28,6 @@ class Model extends \Illuminate\Database\Eloquent\Model
 	protected $repository;
 
 	protected $guarded = ['id'];
-
-	/**
-	 * @return string
-	 */
-	public function getViewPath()
-	{
-		return $this->viewPath;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getEndpoint()
-	{
-		return $this->endpoint;
-	}
 
 	/**
 	 * @param bool $tablePrefix
