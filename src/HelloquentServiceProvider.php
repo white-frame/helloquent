@@ -1,6 +1,5 @@
 <?php namespace WhiteFrame\Helloquent;
 
-use App\User;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 use WhiteFrame\Support\Application;
@@ -33,7 +32,7 @@ class HelloquentServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //dd(User::email('admin@admin.com')->toSql());
+
     }
 
     /**
