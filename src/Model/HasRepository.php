@@ -1,5 +1,6 @@
 <?php namespace WhiteFrame\Helloquent\Model;
 
+use Illuminate\Database\Eloquent\Builder;
 use WhiteFrame\Helloquent\Exceptions\RepositoryNotSpecifiedException;
 use WhiteFrame\Helloquent\Repository;
 
@@ -26,13 +27,6 @@ trait HasRepository
 		return !empty($this->repository) AND class_exists($this->repository);
 	}
 
-	public static function repository()
-	{
-		$class = get_called_class();
-		$entity = new $class();
-		return $entity->getRepository();
-	}
-
 	/**
 	 * Instanciate a new Repository for this Model.
 	 *
@@ -41,10 +35,50 @@ trait HasRepository
 	 */
 	public function getRepository()
 	{
-		if($this->hasRepository()) {
+		if(!$this->hasRepository()) {
 			throw new RepositoryNotSpecifiedException('Could get repository of ' . get_class($this) . '. Please fill $repository property.');
 		}
 
 		return app($this->repository);
+	}
+
+	/**
+	 * Statically get the model repository
+	 *
+	 * @return mixed
+	 */
+	public static function repository()
+	{
+		$class = get_called_class();
+		$entity = new $class();
+		return $entity->getRepository();
+	}
+
+	/**
+	 * Create a new Eloquent query builder for the model.
+	 *
+	 * @param  \Illuminate\Database\Query\Builder $query
+	 * @return \Illuminate\Database\Eloquent\Builder|static
+	 */
+	public function newEloquentBuilder($query)
+	{
+		$builder = new Builder($query);
+
+		// Registering repository scopes
+		if($this->hasRepository()) {
+			$repository = $this->getRepository();
+
+			foreach(get_class_methods($repository) as $method) {
+				if(starts_with($method, 'scope')) {
+					$scope = lcfirst(preg_replace('/scope/', '', $method, 1));
+
+					$builder->macro($scope, function() use ($method, $repository) {
+						return call_user_func_array([$repository, $method], func_get_args());
+					});
+				}
+			}
+		}
+
+		return $builder;
 	}
 }

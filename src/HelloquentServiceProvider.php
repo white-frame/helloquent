@@ -1,5 +1,6 @@
 <?php namespace WhiteFrame\Helloquent;
 
+use App\User;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 use WhiteFrame\Support\Application;
@@ -22,11 +23,7 @@ class HelloquentServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('white-frame.helloquent.builder.manager', function ($app) {
-            return new \WhiteFrame\Helloquent\Builder\Manager();
-        });
 
-        Application::alias('WhiteFrame\Helloquent', 'WhiteFrame\Helloquent\Builder\Facades\ManagerFacade');
     }
 
     /**
@@ -36,7 +33,7 @@ class HelloquentServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'helloquent');
+        //dd(User::email('admin@admin.com')->toSql());
     }
 
     /**
