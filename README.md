@@ -10,6 +10,12 @@ For the complete usage of the package extends `WhiteFrame\Helloquent\Model`.
 use WhiteFrame\Helloquent\Model;
 
 class User extends Model {
+    protected $presenter = 'App\Presenters\UserPresenter';
+    protected $renderer = 'App\Renderers\UserRenderer';
+    protected $transformer = 'App\Transformers\UserTransformer';
+    protected $repository = 'App\Repositories\UserRepository';
+    protected $endpoint = 'users';
+    
     // Your stuff here ...
 }
 ```
