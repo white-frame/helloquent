@@ -16,9 +16,26 @@ class User extends Model {
 
 ## Included in the package
 
-* [Presenter](https://github.com/white-frame/helloquent/wiki/Presenter) : present your attributes for displaying.
-* [Renderer](https://github.com/white-frame/helloquent/wiki/Renderer) : render automatically your model into views
-* [Transformer](https://github.com/white-frame/helloquent/wiki/Transformer) : transform model datas into array responses (for api)
-* [Resource](https://github.com/white-frame/helloquent/wiki/Resource) : bind automatically models into URL.
-* [Repository](https://github.com/white-frame/helloquent/wiki/Repository) : assign repository and bind scopes automatically.
-* [Helpers](https://github.com/white-frame/helloquent/wiki/Helpers) : some models helpers
+#### [Presenter](https://github.com/white-frame/helloquent/wiki/Presenter)
+
+Present your eloquent datas for your views using a flexible presenter.
+
+#### [Renderer](https://github.com/white-frame/helloquent/wiki/Renderer)
+
+Abtract the resource display logic index/show/edit on your blade views.
+
+#### [Transformer](https://github.com/white-frame/helloquent/wiki/Transformer)
+
+Transform your models to powerfull arrays in your API.
+
+#### [Resource](https://github.com/white-frame/helloquent/wiki/Resource)
+
+Bind your model into and URL automatically.
+
+#### [Repository](https://github.com/white-frame/helloquent/wiki/Repository)
+
+Eloquent compatible repository pattern implementation for your application.
+
+#### [Helpers](https://github.com/white-frame/helloquent/wiki/Helpers)
+
+Some helpers built for the package.
