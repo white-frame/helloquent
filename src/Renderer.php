@@ -32,7 +32,9 @@ class Renderer
 	 */
 	public function index($bind = [])
 	{
-		return view($this->path . '.index', $bind);
+		return view($this->path . '.index', $bind, [
+			'entities' => $this->entity->all()
+		]);
 	}
 
 	/**
