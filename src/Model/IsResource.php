@@ -13,12 +13,12 @@ trait IsResource
 		return !empty($this->endpoint);
 	}
 
-	public function endpoint()
+	public function endpoint($path = '')
 	{
 		if(!$this->hasEndpoint()) {
 			throw new InvalidEndpointException('Could get endpoint of ' . get_class($this) . '. Please fill $endpoint property.');
 		}
 
-		return $this->endpoint;
+		return $this->endpoint . $path;
 	}
 }
