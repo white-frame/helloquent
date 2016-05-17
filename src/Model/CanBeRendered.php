@@ -23,7 +23,7 @@ trait CanBeRendered
 	 */
 	public function hasRenderer()
 	{
-		return !empty($this->viewPath);
+		return !empty($this->renderer) AND class_exists($this->renderer);
 	}
 
 	/**
@@ -36,13 +36,13 @@ trait CanBeRendered
 	{
 		if($this->hasRenderer()) {
 			if(!$this->rendererInstance) {
-				$this->rendererInstance = new Renderer($this, $this->viewPath);
+				$this->rendererInstance = new $this->renderer($this);
 			}
 
 			return $this->rendererInstance;
 		}
 		else {
-			throw new InvalidViewPathException('Could get renderer for ' . get_class($this) . '. Please fill $viewPath property.');
+			throw new InvalidViewPathException('Could get renderer for ' . get_class($this) . '. Please fill $renderer property.');
 		}
 	}
 
