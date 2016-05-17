@@ -1,7 +1,8 @@
 <?php
 namespace WhiteFrame\Helloquent;
 
-use WhiteFrame\Dynatable\Dynatable;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Traits\Macroable;
 use WhiteFrame\Helloquent\Exceptions\EntityNotSpecifiedException;
 use WhiteFrame\Statistics\Statistics;
 
@@ -10,6 +11,8 @@ use WhiteFrame\Statistics\Statistics;
  */
 class Repository
 {
+	use Macroable;
+
 	protected $entity;
 
 	/**
@@ -33,7 +36,7 @@ class Repository
 	public function getModel()
 	{
 		if(empty($this->entity))
-			throw new EntityNotSpecifiedException("No valid entity found for repository " . get_class($this));
+			throw new EntityNotSpecifiedException("No valid entity found for repository " . get_class($this) . '. Please specify a valid $entity property.');
 
 		$entity = $this->entity;
 
@@ -215,68 +218,6 @@ class Repository
 
 	/**
 	 * @param $query
-	 * @param $options
-	 *
-	 * @return Dynatable
-	 */
-	public function scopeToDynatable($query, $options)
-	{
-		$presentColumns = array_keys($this->getModel()->present()->columns());
-		$databaseColumns = $this->getModel()->getColumns();
-
-		$dynatable = Dynatable::of($query, $databaseColumns, $options);
-
-		// Passing all columns by presenters
-		foreach($presentColumns as $column) {
-			$dynatable = $dynatable->column($column, function ($row) use ($column) {
-				return $row->present()->$column;
-			});
-		}
-
-		// Recording sorting scopes if exists
-		foreach($presentColumns as $column) {
-			$method = 'scopeSort' . ucfirst(camel_case($column));
-			if(method_exists($this, $method)) {
-				$dynatable = $dynatable->sort($column, function ($query, $mode) use ($method) {
-					return $this->$method($query, $mode);
-				});
-			}
-		}
-
-		// Registering search scope if exists
-		if(method_exists($this, 'scopeSearch')) {
-			$dynatable = $dynatable->search(function ($query, $term) {
-				return $this->scopeSearch($query, $term);
-			});
-		}
-
-		// Registering search columns scope if exists
-		$searchColumns = array_keys($this->getModel()->present()->searches());
-		foreach($searchColumns as $column) {
-			$scopeName = 'scope' . camel_case($column);
-
-			if(method_exists($this, $scopeName)) {
-				$dynatable = $dynatable->search($column, function ($query, $term) use ($scopeName) {
-					return $this->$scopeName($query, $term);
-				});
-			}
-		}
-
-		return $dynatable;
-	}
-
-	/**
-	 * @param $query
-	 *
-	 * @return Statistics
-	 */
-	public function scopeToStatistics($query, $options = [])
-	{
-		return Statistics::of($query, $options);
-	}
-
-	/**
-	 * @param $query
 	 * @param $term
 	 * @return Builder
 	 */
@@ -292,21 +233,23 @@ class Repository
 	}
 
 	/**
-	 * @param $query
-	 * @param $startDate
-	 * @param $endDate
+	 * Get the macroable macro
+	 *
+	 * @param $name
+	 * @return Callable
 	 */
-	public function scopeInterval($query, $column, $startDate = null, $endDate = null, $format = 'en')
+	public static function getMacro($name)
 	{
-		if($format == 'fr') {
-			$startDate = preg_replace("#([0-9]{2})+\/([0-9]{2})+\/([0-9]{4})+#", "$3-$2-$1", $startDate);
-			$endDate = preg_replace("#([0-9]{2})+\/([0-9]{2})+\/([0-9]{4})+#", "$3-$2-$1", $endDate);
-		}
+		return static::$macros[$name];
+	}
 
-		if(isset($startDate) AND !empty($startDate) AND isset($endDate) AND !empty($endDate)) {
-			$query->whereBetween($column, [$startDate . " 00:00:00", $endDate . " 23:59:59"]);
-		}
-
-		return $query;
+	/**
+	 * @return mixed
+	 */
+	public function getScopes()
+	{
+		return array_filter(array_merge(get_class_methods($this), array_keys(self::$macros)), function($var) {
+			return starts_with($var, 'scope');
+		});
 	}
 }
