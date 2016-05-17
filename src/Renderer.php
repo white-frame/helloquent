@@ -1,8 +1,6 @@
 <?php
 namespace WhiteFrame\Helloquent;
 
-use WhiteFrame\Helloquent\Model\CanBeRendered;
-
 /**
  * Class Renderer
  * @package WhiteFrame\Helloquent
@@ -23,9 +21,8 @@ class Renderer
 	 * @param $entity
 	 * @param $path
 	 */
-	function __construct($entity, $path)
+	function __construct($entity)
 	{
-		$this->path = $path;
 		$this->entity = $entity;
 	}
 
@@ -35,7 +32,7 @@ class Renderer
 	 */
 	public function index($bind = [])
 	{
-		return view();
+		return view($this->path . '.index', $bind);
 	}
 
 	/**
@@ -44,7 +41,20 @@ class Renderer
 	 */
 	public function show($bind = [])
 	{
-		return view();
+		return view($this->path . '.show', array_merge($bind, [
+			'entity' => $this->entity
+		]));
+	}
+
+	/**
+	 * @param array $bind
+	 * @return mixed
+	 */
+	public function create($bind = [])
+	{
+		return view($this->path . '.create', array_merge($bind, [
+			'entity' => $this->entity
+		]));
 	}
 
 	/**
@@ -53,6 +63,8 @@ class Renderer
 	 */
 	public function edit($bind = [])
 	{
-		return view();
+		return view($this->path . '.edit', array_merge($bind, [
+			'entity' => $this->entity
+		]));
 	}
 }
