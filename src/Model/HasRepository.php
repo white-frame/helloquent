@@ -1,5 +1,6 @@
 <?php namespace WhiteFrame\Helloquent\Model;
 
+use Closure;
 use Illuminate\Database\Eloquent\Builder;
 use WhiteFrame\Helloquent\Exceptions\RepositoryNotSpecifiedException;
 use WhiteFrame\Helloquent\Repository;
@@ -68,12 +69,17 @@ trait HasRepository
 		if($this->hasRepository()) {
 			$repository = $this->getRepository();
 
-			foreach(get_class_methods($repository) as $method) {
+			foreach($repository->getScopes() as $method) {
 				if(starts_with($method, 'scope')) {
 					$scope = lcfirst(preg_replace('/scope/', '', $method, 1));
 
 					$builder->macro($scope, function() use ($method, $repository) {
-						return call_user_func_array([$repository, $method], func_get_args());
+						if($repository::hasMacro($method) AND $repository::getMacro($method) instanceof Closure) {
+							return call_user_func_array($repository::getMacro($method)->bindTo($repository, get_class($repository)), func_get_args());
+						}
+						else {
+							return call_user_func_array([$repository, $method], func_get_args());
+						}
 					});
 				}
 			}
