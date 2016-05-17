@@ -3,6 +3,7 @@
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 use WhiteFrame\Support\Application;
+use WhiteFrame\Support\Framework;
 
 /**
  * Class HelloquentServiceProvider
@@ -22,7 +23,7 @@ class HelloquentServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
+        Framework::registerPackage('helloquent');
     }
 
     /**
