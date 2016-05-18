@@ -11,16 +11,15 @@ use WhiteFrame\Helloquent\Model;
 
 class User extends Model {
     protected $presenter = 'App\Presenters\UserPresenter';
-    protected $renderer = 'App\Renderers\UserRenderer';
     protected $transformer = 'App\Transformers\UserTransformer';
     protected $repository = 'App\Repositories\UserRepository';
-    protected $endpoint = 'users';
+    protected $controller = 'App\Http\Controllers\UserController';
     
     // Your stuff here ...
 }
 ```
 
-## Included in the package
+## Model Objects
 
 #### [Presenter](https://github.com/white-frame/helloquent/wiki/Presenter)
 
@@ -37,6 +36,8 @@ Bind controller access to your Model.
 #### [Repository](https://github.com/white-frame/helloquent/wiki/Repository)
 
 Eloquent compatible repository pattern implementation for your application.
+
+## More stuff
 
 #### [Helpers](https://github.com/white-frame/helloquent/wiki/Helpers)
 
