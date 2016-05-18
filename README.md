@@ -32,7 +32,7 @@ Transform your models to powerfull arrays in your API.
 
 #### [Resource](https://github.com/white-frame/helloquent/wiki/Resource)
 
-Bind your model into and URL automatically.
+Bind controller access to your Model.
 
 #### [Repository](https://github.com/white-frame/helloquent/wiki/Repository)
 
