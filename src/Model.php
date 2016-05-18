@@ -16,13 +16,11 @@ use WhiteFrame\Helloquent\Model\IsResource;
 class Model extends \Illuminate\Database\Eloquent\Model
 {
 	use CanBePresented;
-	use CanBeRendered;
 	use CanBeTransformed;
 	use IsResource;
 	use HasRepository;
 
 	protected $table;
-	protected $viewPath;
 	protected $endpoint;
 	protected $presenter;
 	protected $repository;
