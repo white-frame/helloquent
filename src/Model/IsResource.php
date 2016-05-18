@@ -1,6 +1,6 @@
 <?php namespace WhiteFrame\Helloquent\Model;
 
-use WhiteFrame\Helloquent\Exceptions\InvalidEndpointException;
+use WhiteFrame\Helloquent\Exceptions\InvalidControllerException;
 
 /**
  * Trait IsResource
@@ -8,17 +8,28 @@ use WhiteFrame\Helloquent\Exceptions\InvalidEndpointException;
  */
 trait IsResource
 {
-	public function hasEndpoint()
+	/**
+	 * Check if the Model gave a valid controller
+	 *
+	 * @return bool
+	 */
+	public function hasController()
 	{
-		return !empty($this->endpoint);
+		return !empty($this->controller) AND class_exists($this->controller);
 	}
 
-	public function endpoint($path = '')
+	/**
+	 * Get the controller linked from
+	 *
+	 * @return mixed
+	 * @throws InvalidControllerException
+	 */
+	public function controller()
 	{
-		if(!$this->hasEndpoint()) {
-			throw new InvalidEndpointException('Could get endpoint of ' . get_class($this) . '. Please fill $endpoint property.');
+		if(!$this->hasController()) {
+			throw new InvalidControllerException('Could get controller of ' . get_class($this) . '. Please fill $controller property.');
 		}
 
-		return $this->endpoint . $path;
+		return app()->make($this->controller);
 	}
 }

@@ -21,9 +21,9 @@ class Model extends \Illuminate\Database\Eloquent\Model
 	use HasRepository;
 
 	protected $table;
-	protected $endpoint;
 	protected $presenter;
 	protected $repository;
+	protected $controller;
 
 	protected $guarded = ['id'];
 

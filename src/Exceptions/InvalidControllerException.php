@@ -1,10 +1,10 @@
 <?php namespace WhiteFrame\Helloquent\Exceptions;
 
 /**
- * Class InvalidEndpointException
+ * Class InvalidControllerException
  * @package WhiteFrame\Helloquent\Exceptions
  */
-class InvalidEndpointException extends \Exception
+class InvalidControllerException extends \Exception
 {
     
 }
