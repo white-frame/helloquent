@@ -26,10 +26,6 @@ class User extends Model {
 
 Present your eloquent datas for your views using a flexible presenter.
 
-#### [Renderer](https://github.com/white-frame/helloquent/wiki/Renderer)
-
-Abtract the resource display logic index/show/edit on your blade views.
-
 #### [Transformer](https://github.com/white-frame/helloquent/wiki/Transformer)
 
 Transform your models to powerfull arrays in your API.
