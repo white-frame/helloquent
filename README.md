@@ -29,13 +29,13 @@ Present your eloquent datas for your views using a flexible presenter.
 
 Transform your models to powerfull arrays in your API.
 
-#### [Resource](https://github.com/white-frame/helloquent/wiki/Resource)
-
-Bind controller access to your Model.
-
 #### [Repository](https://github.com/white-frame/helloquent/wiki/Repository)
 
 Eloquent compatible repository pattern implementation for your application.
+
+#### [IsResource](https://github.com/white-frame/helloquent/wiki/IsResource)
+
+Bind controller access to your Model.
 
 ## More stuff
 
