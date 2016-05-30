@@ -24,6 +24,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
 	protected $presenter;
 	protected $repository;
 	protected $controller;
+	protected $transformer;
 
 	protected $guarded = ['id'];
 
@@ -32,6 +33,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
 	 *
 	 * @return array
 	 */
+	
 	public function getColumns($tablePrefix = false)
 	{
 		$columns = Schema::getColumnListing($this->getTable());

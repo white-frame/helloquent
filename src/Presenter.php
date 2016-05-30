@@ -5,7 +5,7 @@ namespace WhiteFrame\Helloquent;
  * Class Presenter
  * @package WhiteFrame\Helloquent
  */
-abstract class Presenter
+class Presenter
 {
 	/**
 	 * @var mixed

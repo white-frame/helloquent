@@ -1,6 +1,5 @@
 <?php namespace WhiteFrame\Helloquent\Model;
 
-use WhiteFrame\Helloquent\Exceptions\PresenterNotSpecifiedException;
 use WhiteFrame\Helloquent\Presenter;
 
 /**
@@ -30,20 +29,20 @@ trait CanBePresented
 	 * Instanciate a new Presenter for this Model or get the previously cached one.
 	 *
 	 * @return Presenter
-	 * @throws PresenterNotSpecifiedException
 	 */
 	protected function getPresenter()
 	{
-		if($this->hasPresenter()) {
-			if(!$this->presenterInstance) {
+		if ($this->hasPresenter()) {
+			if (!$this->presenterInstance) {
 				$this->presenterInstance = new $this->presenter($this);
 			}
-
-			return $this->presenterInstance;
+		} else {
+			if (!$this->presenterInstance) {
+				$this->presenterInstance = new Presenter($this);
+			}
 		}
-		else {
-			throw new PresenterNotSpecifiedException('Could get presenter of ' . get_class($this) . '. Please fill $presenter property.');
-		}
+		
+		return $this->presenterInstance;
 	}
 
 	/**

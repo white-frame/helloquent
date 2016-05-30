@@ -1,6 +1,5 @@
 <?php namespace WhiteFrame\Helloquent\Model;
 
-use WhiteFrame\Helloquent\Exceptions\TransformerNotSpecifiedException;
 use WhiteFrame\Helloquent\Transformer;
 
 /**
@@ -23,14 +22,13 @@ trait CanBeTransformed
 	 * Instanciate a new Transformer for this Model.
 	 *
 	 * @return Transformer
-	 * @throws TransformerNotSpecifiedException
 	 */
 	public function transformer()
 	{
-		if(!$this->hasTransformer()) {
-			throw new TransformerNotSpecifiedException('Could get transformer of ' . get_class($this) . '. Please fill $transformer property.');
+		if (!$this->hasTransformer()) {
+			return new Transformer();
+		} else {
+			return new $this->transformer();
 		}
-
-		return new $this->transformer();
 	}
 }
